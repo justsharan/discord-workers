@@ -1,0 +1,9 @@
+{
+  "name": "discord-workers",
+  "version": "1.0.0",
+  "main": "dist/main.js",
+  "license": "MIT",
+  "dependencies": {
+    "discord-api-types": "^0.29.0"
+  }
+}
