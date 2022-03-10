@@ -1,9 +1,14 @@
 {
   "name": "discord-workers",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "main": "dist/main.js",
   "license": "MIT",
+  "author": "Sharan <sharansr@student.ubc.ca>",
   "dependencies": {
     "discord-api-types": "^0.29.0"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^3.4.0",
+    "typescript": "^4.6.2"
   }
 }
