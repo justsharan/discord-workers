@@ -10,7 +10,7 @@ import {
   RESTPostAPIInteractionFollowupJSONBody,
 } from "discord-api-types/v10";
 
-export default class Interaction {
+export class Interaction {
   #BASE = "https://discord.com/api/v10";
   id: string;
   applicationID: string;

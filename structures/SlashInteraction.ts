@@ -5,9 +5,9 @@ import {
   APIInteractionResponseCallbackData,
   InteractionResponseType,
 } from "discord-api-types/v10";
-import Interaction from "./Interaction";
+import { Interaction } from "./Interaction";
 
-export default class SlashInteraction extends Interaction {
+export class SlashInteraction extends Interaction {
   options: APIApplicationCommandInteractionDataOption[];
   resolved: APIChatInputApplicationCommandInteractionDataResolved;
   #responded = false;

@@ -1,2 +1,3 @@
-export { default as Interaction } from "./structures/Interaction";
-export { default as SlashInteraction } from "./structures/SlashInteraction";
+export * from "./structures/Interaction";
+export * from "./structures/SlashInteraction";
+export * from "./builders/index";
