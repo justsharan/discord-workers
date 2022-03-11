@@ -10,7 +10,7 @@ export class Button {
   };
 
   style(style: Exclude<ButtonStyle, ButtonStyle.Link>): Button {
-    this.#base.style = style as any;
+    this.#base.style = style;
     return this;
   }
 

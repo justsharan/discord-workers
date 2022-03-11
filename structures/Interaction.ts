@@ -14,7 +14,7 @@ export default class Interaction {
   #BASE = "https://discord.com/api/v10";
   id: string;
   applicationID: string;
-  data: any;
+  data: object;
   guildID?: string;
   channelID?: string;
   member?: APIGuildMember;

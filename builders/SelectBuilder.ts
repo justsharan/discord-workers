@@ -7,7 +7,6 @@ import {
 export class SelectMenu {
   #base: Partial<APISelectMenuComponent> = {
     type: ComponentType.SelectMenu,
-    options: [],
   };
 
   customID(id: string): SelectMenu {
@@ -21,7 +20,7 @@ export class SelectMenu {
   }
 
   option(value: SelectMenuOption): SelectMenu {
-    this.#base.options!.push(value.toJSON());
+    this.#base.options = [...(this.#base.options ?? []), value.toJSON()];
     return this;
   }
 

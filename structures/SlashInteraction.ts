@@ -41,10 +41,15 @@ export default class SlashInteraction extends Interaction {
    * @returns The response from Discord
    */
   send(data: APIInteractionResponseCallbackData): Promise<Response> {
-    return this.#responded
-      ? this.followup(data)
-      : this.#deferred && !this.#deferEdited
-      ? this.edit(data)
-      : this.respond(InteractionResponseType.ChannelMessageWithSource, data);
+    if (this.#responded) {
+      return this.followup(data);
+    } else if (this.#deferred && !this.#deferEdited) {
+      return this.edit(data);
+    } else {
+      return this.respond(
+        InteractionResponseType.ChannelMessageWithSource,
+        data
+      );
+    }
   }
 }
