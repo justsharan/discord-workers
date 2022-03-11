@@ -17,7 +17,7 @@ const row = new ActionRow();
 row.component(
   new SelectMenu()
     .customID("fruit")
-    .placeholder("Pick a favorite fruits")
+    .placeholder("Pick your favorite fruit(s)")
     .limits(1, 3)
     .option(new SelectMenuOption().label("Apple"))
     .option(new SelectMenuOption().label("Orange"))
