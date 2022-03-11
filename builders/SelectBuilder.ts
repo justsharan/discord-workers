@@ -39,6 +39,12 @@ export class SelectMenu {
     return this;
   }
 
+  toString(): string {
+    return this.#base.custom_id
+      ? `[SelectMenu ${this.#base.custom_id}]`
+      : "[SelectMenu]";
+  }
+
   toJSON(): APISelectMenuComponent {
     return this.#base as APISelectMenuComponent;
   }

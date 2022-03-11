@@ -36,6 +36,12 @@ export class Button {
     return this;
   }
 
+  toString(): string {
+    return this.#base.custom_id
+      ? `[Button ${this.#base.custom_id}]`
+      : "[Button]";
+  }
+
   toJSON(): APIButtonComponentWithCustomId {
     return this.#base as APIButtonComponentWithCustomId;
   }

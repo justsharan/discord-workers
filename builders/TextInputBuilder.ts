@@ -44,6 +44,12 @@ export class TextInput {
     return this;
   }
 
+  toString(): string {
+    return this.#base.custom_id
+      ? `[TextInput ${this.#base.custom_id}]`
+      : "[TextInput]";
+  }
+
   toJSON(): APITextInputComponent {
     return this.#base as APITextInputComponent;
   }
