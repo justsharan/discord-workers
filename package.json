@@ -16,6 +16,7 @@
     "discord-api-types": "^0.29.0"
   },
   "scripts": {
+    "lint": "eslint .",
     "build": "tsc"
   },
   "devDependencies": {
