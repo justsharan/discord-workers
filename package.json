@@ -1,11 +1,22 @@
 {
   "name": "discord-workers",
   "version": "0.1.0",
-  "main": "dist/main.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "license": "MIT",
   "author": "Sharan <sharansr@student.ubc.ca>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/justsharan/discord-workers.git"
+  },
+  "bugs": {
+    "url": "https://github.com/justsharan/discord-workers/issues"
+  },
   "dependencies": {
     "discord-api-types": "^0.29.0"
+  },
+  "scripts": {
+    "build": "tsc"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^3.4.0",
