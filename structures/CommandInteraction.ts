@@ -1,23 +1,33 @@
 import {
   APIApplicationCommandInteractionDataOption,
-  APIChatInputApplicationCommandInteraction,
   APIChatInputApplicationCommandInteractionDataResolved,
+  APIApplicationCommandInteraction,
   APIInteractionResponseCallbackData,
   InteractionResponseType,
+  ApplicationCommandType,
 } from "discord-api-types/v10";
 import { Interaction } from "./Interaction";
 
-export class SlashInteraction extends Interaction {
-  options: APIApplicationCommandInteractionDataOption[];
-  resolved: APIChatInputApplicationCommandInteractionDataResolved;
+export class CommandInteraction extends Interaction {
+  commandID: string;
+  name: string;
+  options?: APIApplicationCommandInteractionDataOption[] = [];
+  resolved?: APIChatInputApplicationCommandInteractionDataResolved = {};
+  targetID?: string;
   #responded = false;
   #deferred = false;
   #deferEdited = true;
 
-  constructor(payload: APIChatInputApplicationCommandInteraction) {
+  constructor(payload: APIApplicationCommandInteraction) {
     super(payload);
-    this.options = payload.data.options ?? [];
-    this.resolved = payload.data.resolved ?? {};
+    this.commandID = payload.data.id;
+    this.name = payload.data.name;
+    if (payload.data.type === ApplicationCommandType.ChatInput) {
+      this.options = payload.data.options ?? [];
+      this.resolved = payload.data.resolved ?? {};
+    } else {
+      this.targetID = payload.data.target_id;
+    }
   }
 
   /**

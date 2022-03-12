@@ -9,14 +9,14 @@ This is the main part of the library, and it's still a WIP. You can pass in the 
 It's a barebones alternative to a more feature-packed library like [`slash-create`](https://github.com/Snazzah/slash-create) that works on practically any environment. It doesn't care how you structure your project, etc, and just provides a simple API to work with interactions.
 
 ```ts
-import { SlashInteraction } from "discord-workers";
+import { CommandInteraction } from "discord-workers";
 
 addEventListener("fetch", (event) => handle(event.request));
 
 async function handle(req: Request): Promise<Response> {
   // Handle verification and stuff
-  const int = new SlashInteraction(body);
-  if (int.data.name === "ping") {
+  const int = new CommandInteraction(body);
+  if (int.name === "ping") {
     int.send("Pong!");
   }
 }

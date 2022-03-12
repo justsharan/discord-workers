@@ -1,3 +1,3 @@
 export * from "./structures/Interaction";
-export * from "./structures/SlashInteraction";
+export * from "./structures/CommandInteraction";
 export * from "./builders/index";
