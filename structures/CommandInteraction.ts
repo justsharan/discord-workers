@@ -46,6 +46,23 @@ export class CommandInteraction extends Interaction {
   }
 
   /**
+   * Utility function to defer manually
+   * @param ephemeral Whether the deferred message is ephemeral
+   * @returns The response from Discord
+   */
+  manualDefer(ephemeral: false): Response {
+    if (this.#responded) throw new Error("A response has already been sent!");
+    this.#deferred = true;
+    this.#deferEdited = false;
+    return new Response(
+      JSON.stringify({
+        type: InteractionResponseType.DeferredChannelMessageWithSource,
+        data: ephemeral ? { flags: 64 } : {},
+      })
+    );
+  }
+
+  /**
    * Create a new message. If a response has already been sent, then it will be sent as a follow-up. If `SlashInteraction.defer()` has been called, then it will be sent as an edit.
    * @param data The message data
    * @returns The response from Discord
