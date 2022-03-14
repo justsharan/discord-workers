@@ -35,7 +35,7 @@ export class CommandInteraction extends Interaction {
    * @param ephemeral Whether the deferred message is ephemeral
    * @returns The response from Discord
    */
-  defer(ephemeral: false): Promise<Response> {
+  defer(ephemeral = false): Promise<Response> {
     if (this.#responded) throw new Error("A response has already been sent!");
     this.#deferred = true;
     this.#deferEdited = false;
@@ -50,7 +50,7 @@ export class CommandInteraction extends Interaction {
    * @param ephemeral Whether the deferred message is ephemeral
    * @returns The response from Discord
    */
-  manualDefer(ephemeral: false): Response {
+  manualDefer(ephemeral = false): Response {
     if (this.#responded) throw new Error("A response has already been sent!");
     this.#deferred = true;
     this.#deferEdited = false;
