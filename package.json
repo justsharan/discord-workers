@@ -1,6 +1,6 @@
 {
   "name": "discord-workers",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "main": "index.js",
   "types": "index.d.ts",
   "license": "MIT",
@@ -17,9 +17,7 @@
   },
   "scripts": {
     "lint": "eslint .",
-    "build": "tsc",
-    "prepublish": "tsc",
-    "postpublish": "rm -rf **/*.js **/*.d.ts **/*.js.map"
+    "build": "tsc"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.14.0",
