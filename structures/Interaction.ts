@@ -24,7 +24,10 @@ export class Interaction {
   locale: string;
   guildLocale: string;
 
-  constructor(payload: Exclude<APIInteraction, APIPingInteraction>) {
+  constructor(
+    payload: Exclude<APIInteraction, APIPingInteraction>,
+    private isManual = false
+  ) {
     this.id = payload.id;
     this.applicationID = payload.application_id;
     this.data = payload.data;
@@ -42,6 +45,15 @@ export class Interaction {
     type: InteractionResponseType,
     data: APIInteractionResponseCallbackData
   ): Promise<Response> {
+    if (this.isManual) {
+      return Promise.resolve(
+        new Response(JSON.stringify({ type, data }), {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+      );
+    }
     return fetch(
       `${this.#BASE}/interactions/${this.id}/${this.#token}/callback`,
       {

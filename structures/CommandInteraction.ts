@@ -18,8 +18,8 @@ export class CommandInteraction extends Interaction {
   #deferred = false;
   #deferEdited = true;
 
-  constructor(payload: APIApplicationCommandInteraction) {
-    super(payload);
+  constructor(payload: APIApplicationCommandInteraction, manual = false) {
+    super(payload, manual);
     this.commandID = payload.data.id;
     this.name = payload.data.name;
     if (payload.data.type === ApplicationCommandType.ChatInput) {
