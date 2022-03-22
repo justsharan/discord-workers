@@ -1,5 +1,4 @@
 import {
-  APIApplicationCommandInteractionDataOption,
   APIChatInputApplicationCommandInteractionDataResolved,
   APIApplicationCommandInteraction,
   APIInteractionResponseCallbackData,
@@ -11,7 +10,7 @@ import { Interaction } from "./Interaction";
 export class CommandInteraction extends Interaction {
   commandID: string;
   name: string;
-  options?: APIApplicationCommandInteractionDataOption[] = [];
+  options: Record<string, any> = {};
   resolved?: APIChatInputApplicationCommandInteractionDataResolved = {};
   targetID?: string;
   #responded = false;
@@ -23,7 +22,10 @@ export class CommandInteraction extends Interaction {
     this.commandID = payload.data.id;
     this.name = payload.data.name;
     if (payload.data.type === ApplicationCommandType.ChatInput) {
-      this.options = payload.data.options ?? [];
+      for (const option of payload.data.options ?? []) {
+        if (option.type === 1 || option.type === 2) continue;
+        this.options[option.name] = option.value;
+      }
       this.resolved = payload.data.resolved ?? {};
     } else {
       this.targetID = payload.data.target_id;

@@ -43,13 +43,27 @@ export class Interaction {
 
   respond(
     type: InteractionResponseType,
-    data: APIInteractionResponseCallbackData
+    data: APIInteractionResponseCallbackData,
+    files: File[]
   ): Promise<Response> {
+    let body: string | FormData;
+    if (files.length) {
+      body = files.reduce((acc, curr, i) => {
+        acc.set(`files[${i}]`, curr, curr.name);
+        return acc;
+      }, new FormData());
+      body.set("payload_json", JSON.stringify(data));
+    } else {
+      body = JSON.stringify(data);
+    }
     if (this.isManual) {
       return Promise.resolve(
-        new Response(JSON.stringify({ type, data }), {
+        new Response(body, {
           headers: {
-            "Content-Type": "application/json",
+            "Content-Type":
+              body instanceof FormData
+                ? "multipart/form-data"
+                : "application/json",
           },
         })
       );
@@ -63,10 +77,27 @@ export class Interaction {
     );
   }
 
-  followup(data: RESTPostAPIInteractionFollowupJSONBody): Promise<Response> {
+  followup(
+    data: RESTPostAPIInteractionFollowupJSONBody,
+    files: File[]
+  ): Promise<Response> {
+    let body: string | FormData;
+    if (files.length) {
+      body = files.reduce((acc, curr, i) => {
+        acc.set(`files[${i}]`, curr, curr.name);
+        return acc;
+      }, new FormData());
+      body.set("payload_json", JSON.stringify(data));
+    } else {
+      body = JSON.stringify(data);
+    }
     return fetch(`${this.#BASE}/webhooks/${this.id}/${this.#token}`, {
       method: "POST",
-      body: JSON.stringify(data),
+      body,
+      headers: {
+        "Content-Type":
+          body instanceof FormData ? "multipart/form-data" : "application/json",
+      },
     });
   }
 
