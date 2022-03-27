@@ -44,17 +44,17 @@ export class Interaction {
   respond(
     type: InteractionResponseType,
     data: APIInteractionResponseCallbackData,
-    files: File[]
+    files?: File[]
   ): Promise<Response> {
     let body: string | FormData;
-    if (files.length) {
+    if (files) {
       body = files.reduce((acc, curr, i) => {
         acc.set(`files[${i}]`, curr, curr.name);
         return acc;
       }, new FormData());
       body.set("payload_json", JSON.stringify(data));
     } else {
-      body = JSON.stringify(data);
+      body = JSON.stringify({ type, data });
     }
     if (this.isManual) {
       return Promise.resolve(
@@ -79,10 +79,10 @@ export class Interaction {
 
   followup(
     data: RESTPostAPIInteractionFollowupJSONBody,
-    files: File[]
+    files?: File[]
   ): Promise<Response> {
     let body: string | FormData;
-    if (files.length) {
+    if (files) {
       body = files.reduce((acc, curr, i) => {
         acc.set(`files[${i}]`, curr, curr.name);
         return acc;
